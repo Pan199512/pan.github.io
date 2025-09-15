@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>潘志敏 - 作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        primaryLight: '#4080FF',
+                        primaryDark: '#0E42D2',
+                        secondary: '#0E42D2',
+                        accent: '#36BFFA',
+                        dark: {
+                            950: '#0A0F1C',
+                            900: '#111827',
+                            800: '#1F2937',
+                            700: '#374151',
+                            600: '#4B5563',
+                        },
+                        light: {
+                            100: '#FFFFFF',
+                            200: '#F9FAFB',
+                            300: '#F3F4F6',
+                            400: '#E5E7EB',
+                            500: '#D1D5DB',
+                            600: '#9CA3AF',
+                        }
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'rotate-slow': 'rotate 20s linear infinite',
+                        'move-slow': 'move 15s ease-in-out infinite',
+                        'scale-slow': 'scale 10s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { 
+                                opacity: '0',
+                                transform: 'translateY(30px)'
+                            },
+                            '100%': { 
+                                opacity: '1',
+                                transform: 'translateY(0)'
+                            }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        rotate: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' }
+                        },
+                        move: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '50%': { transform: 'translateX(30px)' }
+                        },
+                        scale: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' }
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 基础样式 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body, html {
+            overflow-x: hidden;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        /* 文字换行优化 */
+        .text-wrap-balance {
+            text-wrap: balance;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        /* 移动端优化 */
+        .container {
+            width: 100%;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* 按钮样式优化 */
+        .btn-mobile {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            min-width: 120px;
+            max-width: 100%;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            text-align: center;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        /* 图片响应式优化 - 提高清晰度 */
+        .responsive-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-width: 100%;
+            /* 提高图片显示质量 */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: high-quality;
+            -ms-interpolation-mode: bicubic;
+        }
+        
+        /* 导航栏优化 */
+        #navbar {
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+        
+        /* 移动端菜单 */
+        #mobile-menu {
+            transition: all 0.3s ease;
+        }
+        
+        /* 卡片悬停效果 */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 项目覆盖层 */
+        .portfolio-overlay {
+            background: linear-gradient(to top, rgba(10, 15, 28, 0.9) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        /* 动画工具类 */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 弹窗样式 - 黑色背景优化 */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: #000;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            color: #fff;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 弹窗图片单列显示，等宽不限高，优化清晰度 */
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .modal-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            /* 提高图片显示质量 */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: high-quality;
+            -ms-interpolation-mode: bicubic;
+        }
+        
+        .modal-gallery img:hover {
+            transform: scale(1.03);
+        }
+        
+        /* 图片加载状态 - 深色主题 */
+        .image-loading {
+            position: relative;
+            min-height: 200px;
+            background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 0.5rem;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* 图片错误状态 */
+        .image-error {
+            position: relative;
+            min-height: 200px;
+            background: #333;
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+        
+        .image-error i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* 几何形状装饰 */
+        .geometric-shape {
+            position: absolute;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .circle-shape {
+            border-radius: 50%;
+            border: 2px solid rgba(22, 93, 255, 0.1);
+            background: radial-gradient(circle, rgba(22, 93, 255, 0.1) 0%, rgba(22, 93, 255, 0.05) 50%, transparent 70%);
+        }
+        
+        /* 微交互效果 */
+        .micro-interaction {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-micro:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(22, 93, 255, 0.2);
+        }
+        
+        .btn-micro:active {
+            transform: translateY(0);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #165DFF;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+        
+        /* 大屏幕图片优化 */
+        .large-screen-img {
+            transition: all 0.3s ease;
+        }
+        
+        /* 移动端特定样式 */
+        @media (max-width: 768px) {
+            .mobile-padding {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .mobile-text-center {
+                text-align: center;
+            }
+            
+            .mobile-stack > * {
+                width: 100%;
+                margin-bottom: 1.5rem;
+            }
+            
+            .mobile-stack > *:last-child {
+                margin-bottom: 0;
+            }
+            
+            /* 确保文字不溢出 */
+            h1, h2, h3, h4, h5, h6, p, span, a {
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                word-break: break-word;
+            }
+            
+            /* 按钮宽度优化 */
+            .btn-mobile-full {
+                width: 100%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 280px;
+            }
+            
+            /* 图片大小调整 */
+            .mobile-img-container {
+                max-width: 85%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            /* 移动端弹窗优化 */
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .modal-gallery {
+                gap: 1rem;
+            }
+            
+            .modal-close {
+                top: 0.5rem;
+                right: 0.5rem;
+                width: 2rem;
+                height: 2rem;
+                font-size: 1.2rem;
+            }
+            
+            /* 移动端减少几何形状 */
+            .geometric-shape {
+                display: none;
+            }
+        }
+        
+        /* 中等屏幕样式 */
+        @media (min-width: 769px) and (max-width: 1023px) {
+            .responsive-img {
+                max-width: 100%;
+            }
+            
+            .portfolio-item img {
+                height: 280px;
+                object-fit: cover;
+            }
+            
+            /* 弹窗图片优化 */
+            .modal-gallery img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+        
+        /* 大屏幕样式 */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1200px;
+            }
+            
+            /* 大屏幕图片优化 */
+            .responsive-img {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            /* Hero区域图片优化 */
+            .hero-image-container {
+                max-width: 45% !important;
+                margin: 0 auto;
+            }
+            
+            .hero-image-container img {
+                transform: scale(1);
+                transition: transform 0.5s ease;
+            }
+            
+            .hero-image-container:hover img {
+                transform: scale(1.03);
+            }
+            
+            /* 作品集图片优化 */
+            .portfolio-item img {
+                height: 280px;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+            
+            .portfolio-item:hover img {
+                transform: scale(1.05);
+            }
+            
+            /* 关于区域图片优化 */
+            .about-image-container {
+                max-width: 90% !important;
+            }
+            
+            .about-image-container img {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            /* 大屏幕弹窗优化 */
+            .modal-content {
+                max-width: 1000px;
+            }
+            
+            .modal-gallery img {
+                height: auto;
+                max-height: none;
+                object-fit: contain;
+            }
+        }
+        
+        /* 超大屏幕样式 */
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 1400px;
+            }
+            
+            .hero-image-container {
+                max-width: 40% !important;
+            }
+            
+            .hero-image-container img {
+                transform: scale(1);
+            }
+            
+            .hero-image-container:hover img {
+                transform: scale(1.05);
+            }
+            
+            .portfolio-item img {
+                height: 300px;
+            }
+            
+            .about-image-container {
+                max-width: 85% !important;
+            }
+        }
+        
+        /* 动画元素 */
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .pulse-element {
+            animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .rotate-element {
+            animation: rotate-slow 20s linear infinite;
+        }
+        
+        .move-element {
+            animation: move-slow 15s ease-in-out infinite;
+        }
+        
+        .scale-element {
+            animation: scale-slow 10s ease-in-out infinite;
+        }
+
+        /* 增强渐变效果 */
+        .gradient-bg {
+            background: linear-gradient(135deg, rgba(22, 93, 255, 0.03) 0%, rgba(64, 128, 255, 0.05) 50%, rgba(54, 191, 250, 0.03) 100%);
+        }
+        
+        .gradient-section {
+            background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(249,250,251,0.8) 100%);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-inter bg-light-100 text-dark-800 antialiased">
+    <!-- Navigation -->
+    <header id="navbar" class="fixed w-full z-50 py-3 shadow-sm">
+        <nav class="container mx-auto flex items-center justify-between">
+            <a href="#" class="text-xl font-bold text-primary flex items-center micro-interaction">
+                <span class="fa fa-connectdevelop mr-2"></span>
+                <span>Portfolio</span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#work" class="text-dark-700 hover:text-primary transition-colors duration-200 font-medium nav-link">作品集</a>
+                <a href="#about" class="text-dark-700 hover:text-primary transition-colors duration-200 font-medium nav-link">关于我</a>
+                <a href="#contact" class="bg-primary hover:bg-primaryDark text-white px-4 py-2 rounded-lg transition-all duration-300 font-medium btn-micro">
+                    联系我
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-dark-700 p-2 micro-interaction">
+                <span class="fas fa-bars text-xl"></span>
+            </button>
+        </nav>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full border-t border-light-300">
+            <div class="container mx-auto py-4 space-y-3">
+                <a href="#work" class="block text-dark-700 hover:text-primary transition-colors duration-200 font-medium py-2 micro-interaction">作品集</a>
+                <a href="#about" class="block text-dark-700 hover:text-primary transition-colors duration-200 font-medium py-2 micro-interaction">关于我</a>
+                <a href="#contact" class="block bg-primary hover:bg-primaryDark text-white px-5 py-3 rounded-lg transition-all duration-200 text-center btn-micro">联系我</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden min-h-screen flex items-center relative gradient-bg">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-primaryLight/5 -z-10"></div>
+        
+        <!-- Animated background elements -->
+        <div class="absolute top-1/4 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10 pulse-element"></div>
+        <div class="absolute bottom-1/4 left-0 w-56 h-56 bg-primaryLight/10 rounded-full blur-3xl -z-10 pulse-element" style="animation-delay: 1s"></div>
+        
+        <div class="absolute top-1/3 left-1/4 w-16 h-16 border border-primary/20 rounded-full floating-element"></div>
+        <div class="absolute bottom-1/4 right-1/3 w-12 h-12 border border-primaryLight/20 rounded-full floating-element" style="animation-delay: 1s"></div>
+        
+        <!-- 圆形装饰元素 -->
+        <div class="geometric-shape circle-shape move-element" style="width: 120px; height: 120px; top: 15%; left: 8%;"></div>
+        <div class="geometric-shape circle-shape scale-element" style="width: 80px; height: 80px; top: 70%; right: 12%;"></div>
+        <div class="geometric-shape circle-shape rotate-element" style="width: 60px; height: 60px; bottom: 20%; left: 15%;"></div>
+        <div class="geometric-shape circle-shape move-element" style="width: 100px; height: 100px; top: 25%; right: 20%; animation-delay: 2s;"></div>
+        
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="w-full md:w-1/2 text-center md:text-left mb-10 md:mb-0 animate-on-scroll">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark-900 mb-4 text-wrap-balance">
+                        你好，我是<span class="text-primary">潘志敏</span>
+                    </h1>
+                    <h2 class="text-xl md:text-2xl font-semibold text-dark-700 mb-6">
+                        视觉设计师 & UI设计师
+                    </h2>
+                    <p class="text-dark-600 mb-8 max-w-md mx-auto md:mx-0 text-wrap-balance">
+                        本页面用于展示AI领域的应用和一些作品集。7年设计行业工作者，精通UI设计与平面设计，同时掌握C4D软件，具备摄影摄像与基础剪辑能力。
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="#work" class="btn-mobile btn-mobile-full bg-primary hover:bg-primaryDark text-white font-medium rounded-lg transition-colors btn-micro">
+                            查看作品集
+                        </a>
+                        <a href="#contact" class="btn-mobile btn-mobile-full border border-primary text-primary hover:bg-primary/10 font-medium rounded-lg transition-colors btn-micro">
+                            联系我
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2 hero-image-container animate-on-scroll" style="animation-delay: 0.2s">
+                    <img src="https://i.postimg.cc/wx5vxfCZ/profile.jpg" alt="设计师展示" class="responsive-img rounded-2xl shadow-xl micro-interaction large-screen-img" loading="eager">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Work Section -->
+    <section id="work" class="py-16 bg-light-200 relative gradient-section">
+        <!-- 区块圆形装饰元素 -->
+        <div class="geometric-shape circle-shape rotate-element" style="width: 100px; height: 100px; top: 10%; right: 5%;"></div>
+        <div class="geometric-shape circle-shape scale-element" style="width: 80px; height: 80px; bottom: 10%; left: 8%; animation-delay: 1s;"></div>
+        
+        <div class="container mx-auto">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h2 class="text-2xl md:text-3xl font-bold text-dark-900 mb-4 text-wrap-balance">精选作品集</h2>
+                <p class="text-dark-600 max-w-2xl mx-auto text-wrap-balance mobile-padding">
+                    探索我过往的作品集和案例，每个项目都展示了我的设计过程和解决问题的方法
+                </p>
+            </div>
+            
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-item group rounded-xl overflow-hidden shadow-md card-hover animate-on-scroll" data-project="1">
+                    <div class="relative">
+                        <img src="https://i.postimg.cc/hGtYqC9P/1.jpg" alt="品牌设计" class="responsive-img large-screen-img" loading="eager">
+                        <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-4 text-white">
+                            <h3 class="text-lg font-bold mb-2">品牌设计</h3>
+                            <p class="text-sm mb-4">UI设计/平面设计</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">UI设计</span>
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">平面设计</span>
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">视频拍摄</span>
+                            </div>
+                            <button class="view-details-btn text-left text-sm font-medium text-white hover:text-primaryLight transition-colors">
+                                查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="portfolio-item group rounded-xl overflow-hidden shadow-md card-hover animate-on-scroll" style="animation-delay: 0.1s" data-project="2">
+                    <div class="relative">
+                        <img src="https://i.postimg.cc/3NRH4Yn7/project6.png" alt="C端活动运营" class="responsive-img large-screen-img" loading="eager">
+                        <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-4 text-white">
+                            <h3 class="text-lg font-bold mb-2">C端活动运营</h3>
+                            <p class="text-sm mb-4">C端活动运营</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">活动设计</span>
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">h5设计</span>
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">转化率优化</span>
+                            </div>
+                            <button class="view-details-btn text-left text-sm font-medium text-white hover:text-primaryLight transition-colors">
+                                查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="portfolio-item group rounded-xl overflow-hidden shadow-md card-hover animate-on-scroll" style="animation-delay: 0.2s" data-project="3">
+                    <div class="relative">
+                        <img src="https://i.postimg.cc/rw9qzn98/project3.jpg" alt="C端设计" class="responsive-img large-screen-img" loading="eager">
+                        <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-4 text-white">
+                            <h3 class="text-lg font-bold mb-2">APP设计</h3>
+                            <p class="text-sm mb-4">C端设计</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">智能冰箱</span>
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">物流app</span>
+                            </div>
+                            <button class="view-details-btn text-left text-sm font-medium text-white hover:text-primaryLight transition-colors">
+                                查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="portfolio-item group rounded-xl overflow-hidden shadow-md card-hover animate-on-scroll" style="animation-delay: 0.3s" data-project="4">
+                    <div class="relative">
+                        <img src="https://i.postimg.cc/pXfBhz5W/project5.png" alt="数据大屏" class="responsive-img large-screen-img" loading="eager">
+                        <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-4 text-white">
+                            <h3 class="text-lg font-bold mb-2">数据大屏</h3>
+                            <p class="text-sm mb-4">UI组件库与指南</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">UI设计</span>
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">组件</span>
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">设计规范</span>
+                            </div>
+                            <button class="view-details-btn text-left text-sm font-medium text-white hover:text-primaryLight transition-colors">
+                                查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="portfolio-item group rounded-xl overflow-hidden shadow-md card-hover animate-on-scroll" style="animation-delay: 0.4s" data-project="5">
+                    <div class="relative">
+                        <img src="https://i.postimg.cc/tJPNzVrz/project4.png.jpg" alt="本地生活" class="responsive-img large-screen-img" loading="eager">
+                        <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-4 text-white">
+                            <h3 class="text-lg font-bold mb-2">C端大屏设计</h3>
+                            <p class="text-sm mb-4">本地生活</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">UX设计</span>
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">UI设计</span>
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">设计规范</span>
+                            </div>
+                            <button class="view-details-btn text-left text-sm font-medium text-white hover:text-primaryLight transition-colors">
+                                查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item group rounded-xl overflow-hidden shadow-md card-hover animate-on-scroll" style="animation-delay: 0.5s" data-project="6">
+                    <div class="relative">
+                        <img src="https://i.postimg.cc/zBcYm4Ff/project2.png" alt="其他练习作品" class="responsive-img large-screen-img" loading="eager">
+                        <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-4 text-white">
+                            <h3 class="text-lg font-bold mb-2">其他练习作品</h3>
+                            <p class="text-sm mb-4">其他练习作品</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">粥肆</span>
+                                <span class="px-2 py-1 bg-white/20 text-xs rounded-full">punto</span>
+                            </div>
+                            <button class="view-details-btn text-left text-sm font-medium text-white hover:text-primaryLight transition-colors">
+                                查看详情 <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white relative gradient-section">
+        <!-- 区块圆形装饰元素 -->
+        <div class="geometric-shape circle-shape rotate-element" style="width: 70px; height: 70px; top: 20%; right: 10%;"></div>
+        <div class="geometric-shape circle-shape move-element" style="width: 90px; height: 90px; bottom: 15%; left: 8%; animation-delay: 1.5s;"></div>
+        
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-center gap-10">
+                <div class="w-full md:w-2/5 about-image-container animate-on-scroll">
+                    <img src="https://i.postimg.cc/mDrMcGTp/profile2.png" alt="潘志敏 - 视觉设计师" class="responsive-img rounded-2xl shadow-lg micro-interaction large-screen-img" loading="eager">
+                </div>
+                
+                <div class="w-full md:w-3/5 animate-on-scroll" style="animation-delay: 0.2s">
+                    <h2 class="text-2xl md:text-3xl font-bold text-dark-900 mb-6 text-wrap-balance">关于我</h2>
+                    <p class="text-dark-600 mb-6 leading-relaxed text-wrap-balance">
+                        我是一名专注于用户体验和交互设计的设计师，拥有6年以上的行业经验。我热衷于创造直观、愉悦且具有商业价值的数字产品。
+                    </p>
+                    <p class="text-dark-600 mb-8 leading-relaxed text-wrap-balance">
+                        我曾服务于多家科技公司和初创企业，参与过从概念设计到产品发布的完整流程。我的专长包括用户研究、交互设计、原型制作和UI设计。
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <h3 class="text-lg font-semibold text-dark-900 mb-4">专业技能</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <span class="fa fa-check text-primary mr-3"></span>
+                                    <span class="text-wrap-balance">用户研究与分析</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="fa fa-check text-primary mr-3"></span>
+                                    <span class="text-wrap-balance">UI设计与视觉系统</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="fa fa-check text-primary mr-3"></span>
+                                    <span class="text-wrap-balance">摄影与视频剪辑</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-dark-900 mb-4">使用工具</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <span class="fa fa-check text-primary mr-3"></span>
+                                    <span>Figma</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="fa fa-check text-primary mr-3"></span>
+                                    <span class="text-wrap-balance">Adobe Photoshop & Illustrator</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="fa fa-check text-primary mr-3"></span>
+                                    <span>Sketch</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="btn-mobile btn-mobile-full md:inline-block md:w-auto bg-primary hover:bg-primaryDark text-white font-medium rounded-lg transition-colors text-center btn-micro">
+                        联系我
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gradient-to-br from-primary/5 to-primaryLight/5 relative">
+        <!-- 区块圆形装饰元素 -->
+        <div class="geometric-shape circle-shape scale-element" style="width: 120px; height: 120px; top: 20%; left: 5%;"></div>
+        <div class="geometric-shape circle-shape rotate-element" style="width: 80px; height: 80px; bottom: 20%; right: 8%; animation-delay: 2s;"></div>
+        
+        <div class="container mx-auto">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h2 class="text-2xl md:text-3xl font-bold text-dark-900 mb-4 text-wrap-balance">联系我</h2>
+                <p class="text-dark-600 max-w-2xl mx-auto text-wrap-balance mobile-padding">
+                    有项目想法或合作机会？请随时与我联系，我很乐意听取您的需求并讨论如何帮助您实现目标。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl p-6 shadow-md text-center animate-on-scroll card-hover">
+                    <div class="text-4xl text-primary mb-4 social-icon">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-dark-900">电子邮件</h3>
+                    <p class="text-dark-600 mb-4 text-wrap-balance">请随时发消息给我，我将在24小时内回复您。</p>
+                    <a href="mailto:1210855830@qq.com" class="text-primary hover:text-primaryDark font-medium micro-interaction">
+                        1210855830@qq.com
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-md text-center animate-on-scroll card-hover" style="animation-delay: 0.1s">
+                    <div class="text-4xl text-primary mb-4 social-icon">
+                        <span class="fa fa-phone"></span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-dark-900">电话</h3>
+                    <p class="text-dark-600 mb-4 text-wrap-balance">直接与我联系，讨论您的项目需求。</p>
+                    <a href="tel:+8618443126571" class="text-primary hover:text-primaryDark font-medium micro-interaction">
+                        +86 184 4312 6571
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-md text-center animate-on-scroll card-hover" style="animation-delay: 0.2s">
+                    <div class="text-4xl text-primary mb-4 social-icon">
+                        <span class="fa fa-map-marker"></span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-dark-900">位置</h3>
+                    <p class="text-dark-600 mb-4 text-wrap-balance">我目前在杭州市工作，可接受异地工作机会。</p>
+                    <div class="text-dark-600">浙江省杭州市</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 text-light-300 py-12">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <a href="#" class="text-xl font-bold text-primary flex items-center mb-6 micro-interaction">
+                        <span class="fa fa-connectdevelop mr-2"></span>
+                        <span>潘志敏</span>
+                    </a>
+                    <p class="mb-6 max-w-md text-wrap-balance">专注于创造有温度的交互体验，用设计解决问题。</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-light-100">快速链接</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#" class="text-light-300 hover:text-primary transition-colors duration-200 micro-interaction">首页</a>
+                        </li>
+                        <li>
+                            <a href="#work" class="text-light-300 hover:text-primary transition-colors duration-200 micro-interaction">作品集</a>
+                        </li>
+                        <li>
+                            <a href="#about" class="text-light-300 hover:text-primary transition-colors duration-200 micro-interaction">关于我</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-light-100">联系方式</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="fa fa-envelope text-primary mt-1 mr-3"></span>
+                            <a href="mailto:1210855830@qq.com" class="text-light-300 hover:text-primary micro-interaction">1210855830@qq.com</a>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="fa fa-phone text-primary mt-1 mr-3"></span>
+                            <a href="tel:+8618443126571" class="text-light-300 hover:text-primary micro-interaction">+86 184 4312 6571</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-dark-700 mt-12 pt-8 text-center">
+                <p class="text-light-500 text-sm">© 2024 潘志敏. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Modal - 优化图片显示 -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-close">&times;</div>
+            <h2 id="modal-title" class="text-2xl font-bold mb-4 text-white"></h2>
+            <p id="modal-description" class="text-light-400 mb-6"></p>
+            <div id="modal-gallery" class="modal-gallery"></div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.classList.add('opacity-70');
+            setTimeout(() => {
+                mobileMenuButton.classList.remove('opacity-70');
+            }, 300);
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md', 'bg-white');
+                navbar.classList.remove('bg-white/90');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.add('bg-white/90');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    this.classList.add('opacity-70');
+                    setTimeout(() => {
+                        this.classList.remove('opacity-70');
+                    }, 300);
+                    
+                    // Scroll to target
+                    const offset = 80;
+                    window.scrollTo({
+                        top: targetElement.offsetTop - offset,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        // Initial call
+        animateOnScroll();
+        
+        // Project data
+        const projectData = {
+            1: {
+                title: "品牌设计",
+                description: "为现代健康生活方式设计的移动应用，帮助用户追踪日常活动、健康指标和设定健身目标。设计注重简洁直观的用户界面，让用户轻松记录和查看健康数据。",
+                images: [
+                   "https://i.postimg.cc/hGtYqC9P/1.jpg",    
+                   "https://i.postimg.cc/9FwNmRRZ/2.jpg",    
+                   "https://i.postimg.cc/Jn6hwgLx/2.jpg",    
+                   "https://i.postimg.cc/HnXZtFC3/3.jpg",  
+                   "https://i.postimg.cc/2SvJwbCr/4.jpg",  
+                   "https://i.postimg.cc/qB3506Cn/5.jpg",  
+                   "https://i.postimg.cc/wvS4Lgn7/6.png",  
+                   "https://i.postimg.cc/fbDHf8Hf/7.jpg",  
+                   "https://i.postimg.cc/fT1pmjn8/8.jpg",  
+                   "https://i.postimg.cc/28vRHXxs/9.png",  
+                   "https://i.postimg.cc/CLp6KMj2/10.png",  
+                   "https://i.postimg.cc/HWqF79CB/11.png",  
+                   "https://i.postimg.cc/YCkVd20F/12.png",  
+                   "https://i.postimg.cc/Y2GJ9yTv/13.jpg",  
+                   "https://i.postimg.cc/sD5qPGjy/14.jpg",  
+                   "https://i.postimg.cc/MTJhBFtY/15.png",  
+                   "https://i.postimg.cc/zBLPyVts/16.jpg",   
+                   "https://i.postimg.cc/cJSz5xJY/17.jpg"
+                ]
+            },
+            2: {
+                title: "C端活动运营",
+                description: "重新设计的电子商务平台，专注于提升用户体验和转化率。通过简化购物流程、优化产品展示和增强交互反馈，为用户提供更流畅的购物体验。",
+                images: [
+                   "https://i.postimg.cc/sf6zFGg2/project6-1.png",  
+                   "https://i.postimg.cc/3NcQ2VcG/project6-1-1.png", 
+                   "https://i.postimg.cc/SxXN17Lq/project6-2.png",  
+                   "https://i.postimg.cc/YCJ25G8F/project6-3.png",  
+                   "https://i.postimg.cc/rFZw9YrQ/project6-4.png",  
+                   "https://i.postimg.cc/XJgVB2WK/project6-5.png", 
+                   "https://i.postimg.cc/SKCQkStv/project6-5-1.png",  
+                   "https://i.postimg.cc/tTbqgKKC/project6-5-2.png", 
+                   "https://i.postimg.cc/4yNX6z4D/project6-6.png",  
+                   "https://i.postimg.cc/zBv6V2sV/project6-7-1.jpg",   
+                   "https://i.postimg.cc/50HJZtN7/project6-7-2.jpg",  
+                   "https://i.postimg.cc/MThwx8nW/project6-7-3.jpg",  
+                   "https://i.postimg.cc/5jdRK46C/project6-8-1.jpg",  
+                   "https://i.postimg.cc/3rsrQ2Gg/project6-8-2.jpg",  
+                   "https://i.postimg.cc/0jJ4CM2v/project6-8-3.jpg",   
+                   "https://i.postimg.cc/rFs8zCPW/project6-9.png",   
+                   "https://i.postimg.cc/CxfSsMYx/project6-10.png",  
+                   "https://i.postimg.cc/MG2xPkKb/project6-11.png",  
+                   "https://i.postimg.cc/W3sVVMZd/project6-12.png",  
+                   "https://i.postimg.cc/hGLnNCXF/project6-13.png",  
+                   "https://i.postimg.cc/85wSzjdt/project6-14.png"
+                ]
+            },
+            3: {
+                title: "APP设计",
+                description: "为金融科技平台设计的数据可视化仪表盘，帮助用户监控投资组合、财务状况和市场趋势。设计采用清晰的数据可视化和直观的交互方式，让复杂的金融数据变得易于理解。",
+                images: [
+                   "https://i.postimg.cc/vHfYwHgx/project3-1.jpg",  
+                   "https://i.postimg.cc/nhxHFbBR/project3-2.jpg",  
+                   "https://i.postimg.cc/XNTjPyJ0/project3-3.jpg",  
+                   "https://i.postimg.cc/N0fBX6NR/project3-4.jpg",  
+                   "https://i.postimg.cc/25cm71JM/project3-5.jpg",  
+                   "https://i.postimg.cc/rm7k7vq9/project3-6.png",  
+                   "https://i.postimg.cc/3RkhSKQR/project3-7.jpg",  
+                   "https://i.postimg.cc/Dykh6kjv/project3-8.png",  
+                   "https://i.postimg.cc/BQT0wYkx/project3-9.jpg",  
+                   "https://i.postimg.cc/7PTDSYNt/project3-10.jpg",  
+                   "https://i.postimg.cc/t49j0dG8/project3-11.jpg",  
+                   "https://i.postimg.cc/1zt1X9tH/project3-12.jpg",  
+                   "https://i.postimg.cc/bJSX031S/project3-13.png",  
+                   "https://i.postimg.cc/0NBRJLKq/project3-14.png", 
+                   "https://i.postimg.cc/V6xxKnFG/project3-15.png",  
+                   "https://i.postimg.cc/Y0QJZ0np/project3-16.png",  
+                   "https://i.postimg.cc/Y2gKhDpJ/project3-17.png"
+                ]
+            },
+            4: {
+                title: "数据大屏",
+                description: "为旅行者设计的移动应用，帮助用户规划行程、发现目的地和预订服务。设计注重视觉吸引力和直观的导航，让旅行规划变得简单而愉悦。",
+                images: [
+                   "https://i.postimg.cc/sg34px5p/project5-1.png",  
+                   "https://i.postimg.cc/CdTGpdCw/project5-2-1.jpg",  
+                   "https://i.postimg.cc/WzJGy0k9/project5-2-2.jpg",  
+                   "https://i.postimg.cc/7PCj4c1R/project5-2-3.jpg",  
+                   "https://i.postimg.cc/CxJHJ049/project5-3.jpg" 
+                ]
+            },
+            5: {
+                title: "C端大屏设计",
+                description: "为大型企业设计的设计系统，包含组件库、设计指南和开发文档。设计系统确保了跨产品的一致性，提高了设计和开发效率。",
+                images: [
+                    "https://i.postimg.cc/26gxvxx6/project4-1.png",
+                    "https://i.postimg.cc/6QXzkbWD/project4-2-1.jpg",
+                    "https://i.postimg.cc/VkMDHP8q/project4-2-2.jpg",
+                    "https://i.postimg.cc/BQRmgQdZ/project4-2-3.jpg",
+                    "https://i.postimg.cc/DfjjSc6X/project4-3-1.jpg",
+                    "https://i.postimg.cc/B6Nhc5GR/project4-3-2.jpg",
+                    "https://i.postimg.cc/D0ZxCWv0/project4-3-3.jpg",
+                    "https://i.postimg.cc/mk58Kbkw/project4-3-4.jpg"
+                ]
+            },
+            6: {
+                title: "其他练习作品",
+                description: "为年轻用户群体设计的社交媒体应用，注重视觉内容分享和社交互动。设计采用大胆的色彩方案和流畅的动画效果，创造出引人入胜的用户体验。",
+                images: [
+                   "https://i.postimg.cc/J7sGyLgP/project2-1.png",  
+                   "https://i.postimg.cc/6TssqRSJ/project2-2.png",  
+                   "https://i.postimg.cc/Vs25nhP1/project2-3.png",  
+                   "https://i.postimg.cc/zBcYm4Ff/project2.png",  
+                   "https://i.postimg.cc/8zS5nrC0/project2-5.png",  
+                   "https://i.postimg.cc/pLJTNXhX/project2-6.png",  
+                   "https://i.postimg.cc/HLSkxZ9q/project2-7.png",  
+                   "https://i.postimg.cc/8CkCTQMd/project2-8.png",  
+                   "https://i.postimg.cc/QtHxWQ6H/project2-9.png",
+                ]
+            }
+        };
+        
+        // Modal functionality
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalGallery = document.getElementById('modal-gallery');
+        const modalClose = document.querySelector('.modal-close');
+        
+        // 预加载图片函数 - 改进版本
+        function preloadImage(url) {
+            return new Promise((resolve, reject) => {
+                // 跳过无效URL
+                if (!url || !url.startsWith('http')) {
+                    reject(url);
+                    return;
+                }
+                
+                const img = new Image();
+                img.onload = () => resolve(url);
+                img.onerror = () => {
+                    console.error(`Failed to load image: ${url}`);
+                    reject(url);
+                };
+                img.src = url;
+                
+                // 设置超时
+                setTimeout(() => {
+                    if (!img.complete) {
+                        console.warn(`Image loading timed out: ${url}`);
+                        reject(url);
+                    }
+                }, 10000);
+            });
+        }
+        
+        // Open modal when clicking on portfolio items
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                if (e.target.closest('.view-details-btn')) {
+                    return;
+                }
+                
+                const projectId = item.getAttribute('data-project');
+                
+                if (projectId && projectData[projectId]) {
+                    openModal(projectId);
+                }
+            });
+        });
+        
+        // View details buttons
+        document.querySelectorAll('.view-details-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const projectItem = btn.closest('.portfolio-item');
+                const projectId = projectItem.getAttribute('data-project');
+                
+                btn.classList.add('opacity-70');
+                setTimeout(() => {
+                    btn.classList.remove('opacity-70');
+                }, 300);
+                
+                if (projectId && projectData[projectId]) {
+                    openModal(projectId);
+                }
+            });
+        });
+        
+        // 打开模态窗口的函数 - 改进版本
+        function openModal(projectId) {
+            // Set modal content
+            modalTitle.textContent = projectData[projectId].title;
+            modalDescription.textContent = projectData[projectId].description;
+            
+            // Clear and set gallery images with loading state
+            modalGallery.innerHTML = '';
+            
+            // 过滤掉无效的图片URL
+            const validImages = projectData[projectId].images.filter(url => 
+                url && url.startsWith('http')
+            );
+            
+            if (validImages.length === 0) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'image-error';
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i><p>暂无图片可供展示</p>';
+                modalGallery.appendChild(errorDiv);
+            } else {
+                // 添加加载状态
+                validImages.forEach(() => {
+                    const loadingDiv = document.createElement('div');
+                    loadingDiv.className = 'image-loading';
+                    modalGallery.appendChild(loadingDiv);
+                });
+            }
+            
+            // Show modal first
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // 预加载图片并替换加载状态
+            if (validImages.length > 0) {
+                const imagePromises = validImages.map(url => {
+                    return preloadImage(url)
+                        .then(url => url)
+                        .catch(url => null);
+                });
+                
+                Promise.all(imagePromises).then(urls => {
+                    modalGallery.innerHTML = '';
+                    
+                    urls.forEach(url => {
+                        if (url) {
+                            const imgElement = document.createElement('img');
+                            imgElement.src = url;
+                            imgElement.alt = projectData[projectId].title;
+                            imgElement.loading = 'eager';
+                            // 添加错误处理
+                            imgElement.onerror = function() {
+                                this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIiBmaWxsPSIjOTk5Ij7lm77niYcKCea1i+ivleWbvueJhzwvdGV4dD48L3N2Zz4=';
+                                this.alt = '图片加载失败';
+                            };
+                            modalGallery.appendChild(imgElement);
+                        } else {
+                            const errorDiv = document.createElement('div');
+                            errorDiv.className = 'image-error';
+                            errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i><p>图片加载失败</p>';
+                            modalGallery.appendChild(errorDiv);
+                        }
+                    });
+                });
+            }
+        }
+        
+        // Close modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking on close button
+        modalClose.addEventListener('click', closeModal);
+        
+        // Close modal when clicking outside content
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+        
+        // 添加按钮点击微交互效果
+        document.querySelectorAll('.btn-micro').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.classList.add('scale-95');
+            });
+            
+            btn.addEventListener('mouseup', () => {
+                btn.classList.remove('scale-95');
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.classList.remove('scale-95');
+            });
+        });
+        
+        // 预加载关键图片
+        document.addEventListener('DOMContentLoaded', function() {
+            // 预加载主页重要图片
+            const criticalImages = [
+                "https://i.postimg.cc/7hkksqbm/profile.png",
+                "https://i.postimg.cc/mDrMcGTp/profile2.png",
+                "https://i.postimg.cc/28x8S4kJ/project1.png",
+                "https://i.postimg.cc/3NRH4Yn7/project6.png",
+                "https://i.postimg.cc/rw9qzn98/project3.jpg",
+                "https://i.postimg.cc/pXfBhz5W/project5.png",
+                "https://i.postimg.cc/tJPNzVrz/project4.png.jpg",
+                "https://i.postimg.cc/zBcYm4Ff/project2.png"
+            ];
+            
+            criticalImages.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        });
+    </script>
+</body>
+</html>
